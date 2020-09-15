@@ -1,5 +1,5 @@
-;;;Рисовалка отврестий на пластинки бригантых доспехов
-;;;Каждой точке, лежащей на слое point, - отверстие
+;;;Р РёСЃРѕРІР°Р»РєР° РѕС‚РІСЂРµСЃС‚РёР№ РЅР° РїР»Р°СЃС‚РёРЅРєРё Р±СЂРёРіР°РЅС‚С‹С… РґРѕСЃРїРµС…РѕРІ
+;;;РљР°Р¶РґРѕР№ С‚РѕС‡РєРµ, Р»РµР¶Р°С‰РµР№ РЅР° СЃР»РѕРµ point, - РѕС‚РІРµСЂСЃС‚РёРµ
 ;;;20.07.16
 
 (defun C:Otver ()
@@ -9,26 +9,26 @@
 (setq model_space (vla-get-modelspace active_document))
 (setq radius 0.0)
 
-(setq point (ssget "X" '((0 . "POINT")))) ; получение списка точек
+(setq point (ssget "X" '((0 . "POINT")))) ; РїРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° С‚РѕС‡РµРє
 
-(defun coord (EntName)			; получение координат точки
+(defun coord (EntName)			; РїРѕР»СѓС‡РµРЅРёРµ РєРѕРѕСЂРґРёРЅР°С‚ С‚РѕС‡РєРё
   (setq	p1
 	 (vla-get-coordinates (vlax-ename->vla-object EntName))
   )
 )
 
-(defun lay (EntName) ; получение имени слоя объекта(точки)
+(defun lay (EntName) ; РїРѕР»СѓС‡РµРЅРёРµ РёРјРµРЅРё СЃР»РѕСЏ РѕР±СЉРµРєС‚Р°(С‚РѕС‡РєРё)
   (setq l1
 	 (vla-Get-Layer (vlax-ename->vla-object EntName))
   )
 )
 
-(setq radius (getreal "\n Введите радиус отверстий"))
+(setq radius (getreal "\n Р’РІРµРґРёС‚Рµ СЂР°РґРёСѓСЃ РѕС‚РІРµСЂСЃС‚РёР№"))
 
 (setq counter 0)
 (setq i (- (sslength point) 1))
 
-; Проходим по списку точек. Если слой точки - point, то рисуем вокруг неё окружность 
+; РџСЂРѕС…РѕРґРёРј РїРѕ СЃРїРёСЃРєСѓ С‚РѕС‡РµРє. Р•СЃР»Рё СЃР»РѕР№ С‚РѕС‡РєРё - point, С‚Рѕ СЂРёСЃСѓРµРј РІРѕРєСЂСѓРі РЅРµС‘ РѕРєСЂСѓР¶РЅРѕСЃС‚СЊ 
 (while (<= counter i)   
   (setq obj (ssname point counter))
   (setq buf (coord obj))

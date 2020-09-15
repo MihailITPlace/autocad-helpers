@@ -1,29 +1,29 @@
-;Версия на 27.01.16 ; 21.06.16
-;За каждую врезку - 1 рубль.
+;Р’РµСЂСЃРёСЏ РЅР° 27.01.16 ; 21.06.16
+;Р—Р° РєР°Р¶РґСѓСЋ РІСЂРµР·РєСѓ - 1 СЂСѓР±Р»СЊ.
 
 (defun C:Rezka ()
   (vl-load-com)
 
-  (setq LenCRCL 0)			; инициализация переменных
+  (setq LenCRCL 0)			; РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїРµСЂРµРјРµРЅРЅС‹С…
   (setq LenLine 0)
   (setq Prmtr 0)
   (setq cost 0)
   (setq Vrezka 0)
 
-  (defun crcl (EntName)			; длина окружности 
+  (defun crcl (EntName)			; РґР»РёРЅР° РѕРєСЂСѓР¶РЅРѕСЃС‚Рё 
     (setq	cr
     (vla-get-circumference (vlax-ename->vla-object EntName))
     )
   )
 
-  (defun plln (EntName)			; длина полилинии 
+  (defun plln (EntName)			; РґР»РёРЅР° РїРѕР»РёР»РёРЅРёРё 
     (setq	ln
     (vla-get-length (vlax-ename->vla-object EntName))
     )
   )
 
 
-  (setq a (ssget "X" '((0 . "CIRCLE"))))	; получаем списки примитивов (окружности, либо полилинии)
+  (setq a (ssget "X" '((0 . "CIRCLE"))))	; РїРѕР»СѓС‡Р°РµРј СЃРїРёСЃРєРё РїСЂРёРјРёС‚РёРІРѕРІ (РѕРєСЂСѓР¶РЅРѕСЃС‚Рё, Р»РёР±Рѕ РїРѕР»РёР»РёРЅРёРё)
   (setq b (ssget "X" '((0 . "LWPOLYLINE"))))
 
 
@@ -49,10 +49,10 @@
     )
   )
 
-  (if(/= nil b) (cyclLn)) ; проверяем наличие примитивов
+  (if(/= nil b) (cyclLn)) ; РїСЂРѕРІРµСЂСЏРµРј РЅР°Р»РёС‡РёРµ РїСЂРёРјРёС‚РёРІРѕРІ
   (if(/= nil a) (cyclCRCL))
 
-  (setq rez (getreal "\n Введите цену за погонный метр реза "))
+  (setq rez (getreal "\n Р’РІРµРґРёС‚Рµ С†РµРЅСѓ Р·Р° РїРѕРіРѕРЅРЅС‹Р№ РјРµС‚СЂ СЂРµР·Р° "))
 
   (setq Prmtr (+ LenLine LenCRCL))
   (setq cost (* (/ Prmtr 1000) rez))
